@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="list_item_image">24dp</dimen>
+    <dimen name="list_horiz_margin">16dp</dimen>
+    <dimen name="list_vert_margin">8dp</dimen>
+    <dimen name="large_image">128dp</dimen>
+    <dimen name="large_image_vert_margin">32dp</dimen>
+
+    <dimen name="list_item_text_size">16sp</dimen>
+</resources>

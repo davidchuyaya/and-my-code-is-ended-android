@@ -6,13 +6,77 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <ImageView
+        android:id="@+id/central_image"
+        android:src="@drawable/ic_alarm_24dp"
+        android:layout_width="@dimen/large_image"
+        android:layout_height="@dimen/large_image"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/vibrate_switch"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginVertical="@dimen/large_image_vert_margin"/>
+
+    <ImageView
+        android:id="@+id/vibrate_image"
+        android:src="@drawable/ic_vibration_24px"
+        style="@style/ItemImage"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/vibrate_switch"
+        app:layout_constraintBottom_toBottomOf="@+id/vibrate_switch"
+        app:layout_constraintTop_toTopOf="@+id/vibrate_switch"/>
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/vibrate_switch"
+        android:text="@string/vibrate"
+        style="@style/ItemText"
+        app:layout_constraintLeft_toRightOf="@+id/vibrate_image"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/central_image"/>
+
+    <ImageView
+        android:id="@+id/music_image"
+        android:src="@drawable/ic_audiotrack_black_24dp"
+        style="@style/ItemImage"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/music_picker"
+        app:layout_constraintBottom_toBottomOf="@+id/music_picker"
+        app:layout_constraintTop_toTopOf="@+id/music_picker"/>
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/music_picker"
+        android:text="@string/default_music"
+        style="@style/ItemText"
+        app:layout_constraintLeft_toRightOf="@+id/music_image"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vibrate_switch"/>
+
+    <ImageView
+        android:id="@+id/code_image"
+        android:src="@drawable/ic_code_black_24dp"
+        style="@style/ItemImage"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/code_text"
+        app:layout_constraintTop_toTopOf="@+id/code_text"/>
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/code_text"
+        android:text="@string/code_static_text"
+        style="@style/ItemText"
+        app:layout_constraintLeft_toRightOf="@+id/code_image"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/music_picker"/>
+
+    <ImageView
+        android:id="@+id/time_image"
+        android:src="@drawable/ic_alarm_24dp"
+        style="@style/ItemImage"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/time_picker"
+        app:layout_constraintTop_toTopOf="@+id/time_picker"/>
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/time_picker"
+        android:text="@string/time_pretext"
+        style="@style/ItemText"
+        app:layout_constraintLeft_toRightOf="@+id/time_image"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/code_text"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

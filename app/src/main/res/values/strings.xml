@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">And My Code Is Ended</string>
+    <string name="vibrate">Vibrate</string>
+    <string name="default_music">Default ringtone</string>
+    <string name="code_static_text">Trigger alarm when this line of code is called:</string>
+    <string name="code_dynamic_text">curl blah</string>
+    <string name="time_pretext">or at</string>
+    <string name="time_posttext">, whichever comes first</string>
 </resources>
