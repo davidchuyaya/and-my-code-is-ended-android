@@ -10,19 +10,21 @@
         <item name="colorSecondary">@color/colorSecondary</item>
         <item name="colorOnSecondary">@color/colorOnSecondary</item>
         <item name="backgroundTint">@color/colorPrimaryLight</item>
+        <item name="android:fontFamily">@font/source_code_pro</item>
     </style>
 
     <style name="ItemImage">
         <item name="android:layout_width">@dimen/list_item_image</item>
         <item name="android:layout_height">@dimen/list_item_image</item>
-        <item name="android:layout_marginLeft">@dimen/list_horiz_margin</item>
-        <item name="android:layout_marginVertical">@dimen/list_vert_margin</item>
+        <item name="android:layout_marginHorizontal">@dimen/list_horiz_margin</item>
         <item name="tint">@color/colorOnPrimary</item>
+        <item name="android:alpha">0.8</item>
     </style>
-    <style name="ItemText" parent="Widget.AppCompat.CompoundButton.Switch">
+    <style name="ItemText">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginHorizontal">@dimen/list_horiz_margin</item>
+        <item name="android:layout_marginRight">@dimen/list_horiz_margin</item>
+        <item name="android:layout_marginVertical">@dimen/list_vert_margin</item>
         <item name="android:textColor">@color/colorOnPrimary</item>
         <item name="android:textSize">@dimen/list_item_text_size</item>
     </style>
