@@ -9,7 +9,7 @@
         <item name="colorAccent">@color/colorSecondary</item>
         <item name="colorSecondary">@color/colorSecondary</item>
         <item name="colorOnSecondary">@color/colorOnSecondary</item>
-        <item name="backgroundTint">@color/colorPrimaryLight</item>
+        <item name="colorSurface">@color/colorPrimaryLighter</item>
         <item name="android:fontFamily">@font/source_code_pro</item>
     </style>
 

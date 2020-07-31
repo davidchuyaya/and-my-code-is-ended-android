@@ -5,5 +5,7 @@
     <string name="code_static_text">Trigger alarm when this line of code is called:</string>
     <string name="code_dynamic_text">$ curl https://us-central1-andmycodeisended.cloudfunctions.net/alarm?token=%1$s</string>
     <string name="time_pretext">or at</string>
+    <string name="time_default">pick a time</string>
+    <string name="date_default">and a date</string>
     <string name="time_posttext">whichever comes first</string>
 </resources>
