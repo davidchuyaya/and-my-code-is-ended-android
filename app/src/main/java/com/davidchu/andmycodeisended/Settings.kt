@@ -2,8 +2,7 @@ package com.davidchu.andmycodeisended
 
 import android.content.Context
 import java.time.Instant
-import java.time.LocalDate
-import java.time.LocalTime
+import java.time.LocalDateTime
 import java.time.ZoneId
 
 object Settings {
@@ -20,26 +19,25 @@ object Settings {
             .putString(Keys.Token.name, token)
             .apply()
     }
-    fun getAlarmEpoch(context: Context): Long? {
+    private fun getAlarmEpoch(context: Context): Long? {
         val epoch = context.getSharedPreferences(Keys.Prefs.name, Context.MODE_PRIVATE)
-            .getLong(Keys.Alarm.name, -1)
-        return if (epoch != -1L) epoch else null
+            .getLong(Keys.Alarm.name, 0L)
+        return if (epoch != 0L) epoch else null
     }
-    fun getAlarmTime(context: Context): LocalTime? {
+    fun getAlarmDateTime(context: Context): LocalDateTime? {
         val epoch = getAlarmEpoch(context)
         return if (epoch == null) null else Instant.ofEpochSecond(epoch)
-            .atZone(ZoneId.systemDefault()).toLocalTime()
-    }
-    fun getAlarmDate(context: Context): LocalDate? {
-        val epoch = getAlarmEpoch(context)
-        return if (epoch == null) null else Instant.ofEpochSecond(epoch)
-            .atZone(ZoneId.systemDefault()).toLocalDate()
+            .atZone(ZoneId.systemDefault()).toLocalDateTime()
     }
     fun setAlarmEpoch(context: Context, epoch: Long) {
         context.getSharedPreferences(Keys.Prefs.name, Context.MODE_PRIVATE)
             .edit()
             .putLong(Keys.Alarm.name, epoch)
             .apply()
+    }
+    fun setAlarmDateTime(context: Context, dateTime: LocalDateTime) {
+        val epoch = dateTime.atZone(ZoneId.systemDefault()).toEpochSecond()
+        setAlarmEpoch(context, epoch)
     }
     fun getAlarmOn(context: Context): Boolean {
         return context.getSharedPreferences(Keys.Prefs.name, Context.MODE_PRIVATE)
