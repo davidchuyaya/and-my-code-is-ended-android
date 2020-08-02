@@ -5,7 +5,13 @@ import android.content.Context
 import android.content.Intent
 
 class AlarmReceiver: BroadcastReceiver() {
+    companion object Extra {
+        const val triggerExtra = "Trigger"
+    }
+
     override fun onReceive(context: Context, intent: Intent) {
-        Notifications.startFullScreenNotification(context, Notifications.Trigger.Time)
+        val titleRes = intent.getIntExtra(triggerExtra, R.string.alarm_title_time_trigger)
+        Notifications.startFullScreenNotification(context, titleRes)
+        Settings.setAlarmOn(context, false)
     }
 }

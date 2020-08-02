@@ -1,5 +1,6 @@
 package com.davidchu.andmycodeisended
 
+import android.content.Intent
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
@@ -8,6 +9,8 @@ class ReceivedMessageService : FirebaseMessagingService() {
         Settings.setToken(applicationContext, token)
     }
     override fun onMessageReceived(message: RemoteMessage) {
-        Notifications.startFullScreenNotification(applicationContext, Notifications.Trigger.Code)
+        val intent = Intent(applicationContext, AlarmReceiver::class.java)
+        intent.putExtra(AlarmReceiver.triggerExtra, Notifications.Trigger.Code.notificationTitle)
+        sendBroadcast(intent)
     }
 }

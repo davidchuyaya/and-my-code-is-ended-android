@@ -9,7 +9,7 @@
     <string name="date_default">and a date</string>
     <string name="time_posttext">whichever comes first</string>
 
-    <string name="alarm_title_code_trigger">Your code has been terminated</string>
-    <string name="alarm_title_time_trigger">Time is up, but your code is still running</string>
-    <string name="alarm_info">Schedule another alarm as necessary</string>
+    <string name="alarm_title_code_trigger">Your code has been terminated.</string>
+    <string name="alarm_title_time_trigger">Time is up, but your code is still running.</string>
+    <string name="alarm_info">Schedule another alarm as necessary.</string>
 </resources>
