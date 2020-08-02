@@ -16,16 +16,39 @@ import java.time.format.DateTimeFormatter
 
 
 class MainActivity : AppCompatActivity() {
-    val musicPickerRequestCode = 314
+    private val musicPickerRequestCode = 314
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        setDateTimeButtons()
         setTokenText()
+        setVibrateSwitch()
         setMusicText(Settings.getMusic(this))
+        setDateTimeButtons()
         createListeners()
+    }
+
+    private fun setTokenText() {
+        code_dynamic_text.text = getString(R.string.code_dynamic_text, Settings.getToken(this))
+
+        TokenUtil.callWithNewToken {token ->
+            if (token == null)
+                return@callWithNewToken
+            code_dynamic_text.text = getString(R.string.code_dynamic_text, token)
+            Settings.setToken(this, token)
+        }
+    }
+
+    private fun setMusicText(uri: Uri?) {
+        if (uri == null)
+            music_picker.text = getString(R.string.default_music)
+        else
+            music_picker.text = RingtoneManager.getRingtone(this, uri).getTitle(this)
+    }
+
+    private fun setVibrateSwitch() {
+        vibrate_switch.isChecked = Settings.getVibrate(this)
     }
 
     private fun setDateTimeButtons() {
@@ -60,24 +83,9 @@ class MainActivity : AppCompatActivity() {
             Notifications.setAlarm(this, dateTime)
     }
 
-    private fun setTokenText() {
-        TokenUtil.callWithNewToken {token ->
-            if (token == null)
-                return@callWithNewToken
-            code_dynamic_text.text = getString(R.string.code_dynamic_text, token)
-            Settings.setToken(this, token)
-        }
-    }
-
-    private fun setMusicText(uri: Uri?) {
-        if (uri == null)
-            music_picker.text = getString(R.string.default_music)
-        else
-            music_picker.text = RingtoneManager.getRingtone(this, uri).getTitle(this)
-    }
-
     private fun createListeners() {
         code_clickable_area.setOnClickListener { onShareClicked() }
+        vibrate_switch.setOnCheckedChangeListener {_, isChecked -> Settings.setVibrate(this, isChecked)}
         music_picker.setOnClickListener { onMusicPickerClicked() }
         time_picker.setOnClickListener { PickerFragment().show(supportFragmentManager, "time") }
         date_picker.setOnClickListener { PickerFragment().show(supportFragmentManager, "date")}

@@ -8,7 +8,7 @@ import java.time.ZoneId
 
 object Settings {
     enum class Keys {
-        Prefs, Token, Music, Alarm, AlarmOn
+        Prefs, Token, Vibrate, Music, Alarm, AlarmOn
     }
     fun getToken(context: Context): String? {
         return context.getSharedPreferences(Keys.Prefs.name, Context.MODE_PRIVATE)
@@ -18,6 +18,16 @@ object Settings {
         context.getSharedPreferences(Keys.Prefs.name, Context.MODE_PRIVATE)
             .edit()
             .putString(Keys.Token.name, token)
+            .apply()
+    }
+    fun getVibrate(context: Context): Boolean {
+        return context.getSharedPreferences(Keys.Prefs.name, Context.MODE_PRIVATE)
+            .getBoolean(Keys.Vibrate.name, false)
+    }
+    fun setVibrate(context: Context, vibrate: Boolean) {
+        context.getSharedPreferences(Keys.Prefs.name, Context.MODE_PRIVATE)
+            .edit()
+            .putBoolean(Keys.Vibrate.name, vibrate)
             .apply()
     }
     fun getMusic(context: Context): Uri? {

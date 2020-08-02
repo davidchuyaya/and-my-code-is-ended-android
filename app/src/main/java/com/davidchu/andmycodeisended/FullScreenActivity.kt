@@ -6,6 +6,8 @@ import android.media.Ringtone
 import android.media.RingtoneManager
 import android.os.Build
 import android.os.Bundle
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_full_screen.*
@@ -15,6 +17,8 @@ class FullScreenActivity: AppCompatActivity() {
         const val triggerExtra = "Trigger"
     }
 
+    private val vibrateMillis = 5000L
+    private var vibrator: Vibrator? = null
     private var music: Ringtone? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,6 +29,7 @@ class FullScreenActivity: AppCompatActivity() {
         title_text.text = getString(intent.getIntExtra(triggerExtra, R.string.alarm_title_time_trigger))
         ok_button.setOnClickListener { dismissFullscreen() }
         startMusic()
+        startVibrating()
     }
 
     private fun turnScreenOn() {
@@ -47,8 +52,15 @@ class FullScreenActivity: AppCompatActivity() {
         music?.play()
     }
 
+    private fun startVibrating() {
+        if (!Settings.getVibrate(this)) return
+        vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+        vibrator?.vibrate(VibrationEffect.createOneShot(vibrateMillis, VibrationEffect.DEFAULT_AMPLITUDE))
+    }
+
     private fun dismissFullscreen() {
         music?.stop()
+        vibrator?.cancel()
         onBackPressed()
         Notifications.cancelAlarm(this)
         Notifications.cancelNotification(this) //dismiss notification
