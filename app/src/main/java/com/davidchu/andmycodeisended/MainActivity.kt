@@ -16,6 +16,8 @@ import java.time.format.DateTimeFormatter
 
 
 class MainActivity : AppCompatActivity() {
+    private val venmoMe = "https://venmo.com/davidchuyaya"
+    private val myWebsite = "https://u.nu/davidchu"
     private val musicPickerRequestCode = 314
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,6 +25,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         setTokenText()
+        setInstructionsPager()
         setVibrateSwitch()
         setMusicText(Settings.getMusic(this))
         setDateTimeButtons()
@@ -38,6 +41,10 @@ class MainActivity : AppCompatActivity() {
             code_dynamic_text.text = getString(R.string.code_dynamic_text, token)
             Settings.setToken(this, token)
         }
+    }
+
+    private fun setInstructionsPager() {
+        instructions_pager.adapter = InstructionsAdapter(this)
     }
 
     private fun setMusicText(uri: Uri?) {
@@ -90,6 +97,8 @@ class MainActivity : AppCompatActivity() {
         time_picker.setOnClickListener { PickerFragment().show(supportFragmentManager, "time") }
         date_picker.setOnClickListener { PickerFragment().show(supportFragmentManager, "date")}
         time_switch.setOnCheckedChangeListener { _, isChecked -> onTimeSwitchClicked(isChecked) }
+        venmo_me_text.setOnClickListener { openWebsite(venmoMe) }
+        my_website_text.setOnClickListener { openWebsite(myWebsite) }
     }
 
     override fun onAttachFragment(fragment: Fragment) {
@@ -157,5 +166,9 @@ class MainActivity : AppCompatActivity() {
             Notifications.cancelAlarm(this)
         else if (alarmTime != null)
             Notifications.setAlarm(this, alarmTime)
+    }
+
+    private fun openWebsite(url: String) {
+        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
     }
 }

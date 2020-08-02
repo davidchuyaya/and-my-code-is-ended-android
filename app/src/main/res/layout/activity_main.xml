@@ -10,17 +10,16 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingVertical="@dimen/large_image_vert_margin">
-
-        <ImageView
-            android:id="@+id/central_image"
-            android:src="@drawable/ic_alarm_24dp"
-            android:layout_width="@dimen/large_image"
-            android:layout_height="@dimen/large_image"
+        android:paddingVertical="@dimen/medium_margin">
+        
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/instructions_pager"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/vibrate_switch"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"/>
+            app:layout_constraintRight_toRightOf="parent" />
 
         <ImageView
             android:id="@+id/vibrate_image"
@@ -37,7 +36,7 @@
             style="@style/ItemText"
             app:layout_constraintLeft_toRightOf="@+id/vibrate_image"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/central_image"/>
+            app:layout_constraintTop_toBottomOf="@+id/instructions_pager"/>
 
         <ImageView
             android:id="@+id/music_image"
@@ -50,9 +49,7 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/music_picker"
-            style="@style/ItemText"
-            android:background="?attr/selectableItemBackground"
-            android:clickable="true"
+            style="@style/ClickableText"
             android:paddingVertical="@dimen/list_vert_margin"
             android:text="@string/default_music"
             app:layout_constraintLeft_toRightOf="@+id/music_image"
@@ -159,7 +156,41 @@
             style="@style/ItemText"
             app:layout_constraintLeft_toLeftOf="@+id/time_picker_pretext"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/date_picker"/>
+            app:layout_constraintTop_toBottomOf="@+id/date_picker"
+            app:layout_constraintBottom_toTopOf="@+id/venmo_me_text"/>
+
+        <ImageView
+            android:id="@+id/thumb_up_image"
+            android:src="@drawable/ic_thumb_up_24"
+            style="@style/ItemImage"
+            android:tint="@color/colorSecondaryDark"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/venmo_me_text"
+            app:layout_constraintTop_toTopOf="@+id/venmo_me_text"
+            app:layout_constraintBottom_toBottomOf="@+id/my_website_text"/>
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/venmo_me_text"
+            android:text="@string/venmo_me"
+            android:fontFamily="@font/extra_light"
+            android:textSize="@dimen/venmo_website_size"
+            android:layout_marginTop="@dimen/large_margin"
+            android:layout_marginBottom="0dp"
+            style="@style/ClickableText"
+            app:layout_constraintLeft_toRightOf="@+id/thumb_up_image"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/time_picker_posttext"
+            app:layout_constraintBottom_toTopOf="@+id/my_website_text"/>
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/my_website_text"
+            android:text="@string/website"
+            android:fontFamily="@font/extra_light"
+            android:textSize="@dimen/venmo_website_size"
+            style="@style/ClickableText"
+            android:layout_marginVertical="0dp"
+            app:layout_constraintLeft_toLeftOf="@+id/venmo_me_text"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/venmo_me_text"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

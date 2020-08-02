@@ -4,9 +4,12 @@
     <dimen name="list_horiz_margin">16dp</dimen>
     <dimen name="list_vert_margin">8dp</dimen>
     <dimen name="large_image">144dp</dimen>
-    <dimen name="large_image_vert_margin">32dp</dimen>
+    <dimen name="large_margin">48dp</dimen>
+    <dimen name="medium_margin">24dp</dimen>
+    <dimen name="card_width">256dp</dimen>
 
     <dimen name="list_item_text_size">16sp</dimen>
+    <dimen name="venmo_website_size">12sp</dimen>
     <dimen name="full_screen_title_size">36sp</dimen>
     <dimen name="full_screen_info_size">24sp</dimen>
 </resources>

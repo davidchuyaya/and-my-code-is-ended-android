@@ -8,10 +8,17 @@
     <string name="time_default">pick a time</string>
     <string name="date_default">and a date</string>
     <string name="time_posttext">whichever comes first</string>
+    <string name="venmo_me">Venmo me a penny @davidchuyaya</string>
+    <string name="website">Or give me a job at u.nu/davidchu</string>
 
     <string name="music_picker_title">Select an alarm</string>
 
     <string name="alarm_title_code_trigger">Your code has been terminated.</string>
     <string name="alarm_title_time_trigger">Time is up, but your code is still running.</string>
     <string name="alarm_info">Schedule another alarm as necessary.</string>
+
+    <string name="instructions_0">Waiting for your code to finish?</string>
+    <string name="instructions_1">Copy the code below to the end of your program…</string>
+    <string name="instructions_2">Take a nap…</string>
+    <string name="instructions_3">And we\'ll wake you up when it\'s done!</string>
 </resources>
