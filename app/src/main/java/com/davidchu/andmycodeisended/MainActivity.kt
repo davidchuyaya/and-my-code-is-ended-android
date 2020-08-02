@@ -3,6 +3,8 @@ package com.davidchu.andmycodeisended
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Intent
+import android.media.RingtoneManager
+import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -12,7 +14,9 @@ import java.time.LocalDateTime
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 
+
 class MainActivity : AppCompatActivity() {
+    val musicPickerRequestCode = 314
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,6 +24,7 @@ class MainActivity : AppCompatActivity() {
 
         setDateTimeButtons()
         setTokenText()
+        setMusicText(Settings.getMusic(this))
         createListeners()
     }
 
@@ -64,8 +69,16 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun setMusicText(uri: Uri?) {
+        if (uri == null)
+            music_picker.text = getString(R.string.default_music)
+        else
+            music_picker.text = RingtoneManager.getRingtone(this, uri).getTitle(this)
+    }
+
     private fun createListeners() {
         code_clickable_area.setOnClickListener { onShareClicked() }
+        music_picker.setOnClickListener { onMusicPickerClicked() }
         time_picker.setOnClickListener { PickerFragment().show(supportFragmentManager, "time") }
         date_picker.setOnClickListener { PickerFragment().show(supportFragmentManager, "date")}
         time_switch.setOnCheckedChangeListener { _, isChecked -> onTimeSwitchClicked(isChecked) }
@@ -100,6 +113,30 @@ class MainActivity : AppCompatActivity() {
 
         val shareIntent = Intent.createChooser(sendIntent, null)
         startActivity(shareIntent)
+    }
+
+    private fun onMusicPickerClicked() {
+        val intent = Intent(RingtoneManager.ACTION_RINGTONE_PICKER)
+            .putExtra(RingtoneManager.EXTRA_RINGTONE_EXISTING_URI, Settings.getMusic(this))
+            .putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE, getString(R.string.music_picker_title))
+            .putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_SILENT, true)
+            .putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, true)
+            .putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE, RingtoneManager.TYPE_ALARM)
+        startActivityForResult(intent, musicPickerRequestCode)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (data == null) return
+        when (requestCode) {
+            musicPickerRequestCode -> {
+                val music = data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI)
+                        as Uri?
+                Settings.setMusic(this, music)
+                setMusicText(music)
+            }
+        }
     }
 
     private fun onTimeSwitchClicked(on: Boolean) {

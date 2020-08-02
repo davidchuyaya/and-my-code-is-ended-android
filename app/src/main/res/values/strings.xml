@@ -1,13 +1,15 @@
 <resources>
     <string name="app_name">And My Code Is Ended</string>
     <string name="vibrate">Vibrate</string>
-    <string name="default_music">Default ringtone</string>
+    <string name="default_music">None</string>
     <string name="code_static_text">Trigger alarm when this line of code is called:</string>
     <string name="code_dynamic_text">$ curl https://us-central1-andmycodeisended.cloudfunctions.net/alarm?token=%1$s</string>
     <string name="time_pretext">or at</string>
     <string name="time_default">pick a time</string>
     <string name="date_default">and a date</string>
     <string name="time_posttext">whichever comes first</string>
+
+    <string name="music_picker_title">Select an alarm</string>
 
     <string name="alarm_title_code_trigger">Your code has been terminated.</string>
     <string name="alarm_title_time_trigger">Time is up, but your code is still running.</string>

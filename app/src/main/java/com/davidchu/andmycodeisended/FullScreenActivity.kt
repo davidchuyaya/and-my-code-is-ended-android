@@ -2,9 +2,10 @@ package com.davidchu.andmycodeisended
 
 import android.app.KeyguardManager
 import android.content.Context
+import android.media.Ringtone
+import android.media.RingtoneManager
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_full_screen.*
@@ -14,14 +15,16 @@ class FullScreenActivity: AppCompatActivity() {
         const val triggerExtra = "Trigger"
     }
 
+    private var music: Ringtone? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_full_screen)
 
         turnScreenOn()
-        title_text.text = getString(intent.getIntExtra(triggerExtra, R.string.alarm_info))
+        title_text.text = getString(intent.getIntExtra(triggerExtra, R.string.alarm_title_time_trigger))
         ok_button.setOnClickListener { dismissFullscreen() }
-        Log.i("Full", "here we go")
+        startMusic()
     }
 
     private fun turnScreenOn() {
@@ -38,7 +41,14 @@ class FullScreenActivity: AppCompatActivity() {
         }
     }
 
+    private fun startMusic() {
+        val uri = Settings.getMusic(this) ?: return
+        music = RingtoneManager.getRingtone(this, uri)
+        music?.play()
+    }
+
     private fun dismissFullscreen() {
+        music?.stop()
         onBackPressed()
         Notifications.cancelAlarm(this)
         Notifications.cancelNotification(this) //dismiss notification
